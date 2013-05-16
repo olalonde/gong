@@ -1,0 +1,24 @@
+{
+  "name": "konfu",
+  "version": "0.0.1",
+  "description": "Vox Tracker web app",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": "true",
+  "repository": "",
+  "author": "Olivier Lalonde <olalonde@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "~0.2.8",
+    "underscore": "~1.4.4",
+    "connect-redis": "~1.4.5",
+    "connect-acceptoverride": "0.0.3",
+    "daobao": "0.0.5",
+    "chungking": "0.0.6",
+    "railway-routes": "0.0.9-3",
+    "consolidate": "~0.9.1",
+    "handlebars": "~1.0.11"
+  }
+}

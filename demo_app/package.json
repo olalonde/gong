@@ -1,0 +1,15 @@
+{
+  "name": "demo_app",
+  "version": "0.0.0",
+  "description": "demo app for konfu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "konfu"
+  ],
+  "author": "Olivier Lalonde <olalonde@gmail.com>",
+  "license": "MIT"
+}

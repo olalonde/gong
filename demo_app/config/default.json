@@ -1,0 +1,19 @@
+{
+  "domain": "localhost",
+  "http": {
+    "port": 3000,
+    "externalPort": 80
+  },
+  "sessions": {
+    "secret": "some random key here...",
+    "key": "sid",
+    "cookie": {
+      "maxAge": 31536000000
+    }
+  },
+  "redis": {
+
+  },
+  "trust proxy":  true,
+  "uploadDir": "./public/uploads"
+}
