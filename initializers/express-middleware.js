@@ -1,6 +1,9 @@
 var express = require('express'),
   acceptOverride = require('connect-acceptoverride'),
-  path = require('path');
+  path = require('path'),
+  fs = require('fs'),
+  connectr = require('connectr'),
+  passport = require('passport');
 
 /**
  * params:
@@ -13,15 +16,23 @@ module.exports = function (params, cb) {
   var app = params.app,
     config = params.config;
 
+  connectr = connectr(app);
+
   /**
    * Request parsing
    */
-  app.use(express.cookieParser());
-  app.use(express.bodyParser({ uploadDir: config.uploadDir }));
-  app.use(express.methodOverride());
-  app.use(express.json());
-  app.use(acceptOverride());
-  app.use(express.compress()); // @todo: should be done by reverse proxy?
+  connectr.use(express.cookieParser())
+    .as('cookieParser');
+  connectr.use(express.bodyParser({ uploadDir: config.uploadDir }))
+    .as('bodyParser');
+  connectr.use(express.methodOverride())
+    .as('methodOverride');
+  connectr.use(express.json())
+    .as('json');
+  connectr.use(acceptOverride())
+    .as('acceptOverride');
+  connectr.use(express.compress())
+    .as('compress'); // @todo: should be done by reverse proxy?
 
   /**
    * Logging
@@ -29,18 +40,27 @@ module.exports = function (params, cb) {
   // we need to tell the logger to use req.ip instead of the socket's
   // remote address if we want to use the IP set by the reverse proxy
   express.logger['remote-addr'] = function (req) { return req.ip; };
-  app.use(express.logger('dev'));
+  connectr.use(express.logger('dev')).as('logger');
 
   /**
    * Sessions
    */
   config.sessions.sessionStore = params.sessionStore;
-  app.use(express.session(config.sessions));
+  connectr.use(express.session(config.sessions)).as('session');
 
   /**
    * CSRF
    */
-  app.use(express.csrf());
+  connectr.use(express.csrf()).as('csrf');
+
+  /**
+   * User defined middlewares
+   */
+  var user_middleware_path = path.join(config.rootPath, 'config/middleware.js');
+  console.log(user_middleware_path);
+  if (fs.existsSync(user_middleware_path)) {
+    require(user_middleware_path)(app);
+  }
 
   /**
    * Static files
@@ -50,15 +70,15 @@ module.exports = function (params, cb) {
   /**
    * Routes
    */
-  app.use(app.router);
+  connectr.use(app.router).as('router');
 
   /**
    * 404 errors
    */
-  app.use(function(req, res, next) {
+  connectr.use(function(req, res, next) {
     res.status(404);
     res.render('errors/404');
-  });
+  }).as('404');
 
   /**
    * Display errors to browser when in development

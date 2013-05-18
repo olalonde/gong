@@ -13,6 +13,7 @@ Konfu.start = function (cb) {
       require('./initializers/express-sessions'),
       require('./initializers/express-middleware'),
       require('./initializers/express-routes'),
+      require('./initializers/user-initializers'),
       require('./initializers/http-server')
     ],
     function (err) {
