@@ -1,11 +1,12 @@
 var fs = require('fs'),
-  debug = require('debug')('konfu:initializers'),
+  debug = require('debug')('gong:initializers'),
   async = require('async'),
   path = require('path');
 
 module.exports = function (params, cb) {
   var config = params.config;
 
+  // @todo use fs.exists instead of relying on try/catch block
   try {
     user_initializers_path = path.join(config.rootPath, 'config/initializers/');
     var initializers = require(user_initializers_path);

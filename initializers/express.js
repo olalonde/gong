@@ -10,7 +10,9 @@ module.exports = function (params, cb) {
 
   var config = params.config;
 
-  var app = express(); 
+  var app = express();
+
+  app.disable('x-powered-by');
   app.set('views', config.rootPath + '/app/views');
   app.set('view engine', 'hbs');
   app.set('trust proxy', config['trust proxy']);
