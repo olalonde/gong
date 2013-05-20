@@ -14,6 +14,6 @@ module.exports = function (params, cb) {
     .listen(config.http.port, function(err) {
       if (err) return cb(err);
       logger.info('HTTP server listening at http://' + config.domain + ':' + config.http.port);
-      cb();
+      cb(null, params);
     });
 }

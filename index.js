@@ -15,7 +15,8 @@ Gong.start = function (cb) {
       require('./initializers/express-sessions'),
       require('./initializers/express-middleware'),
       require('./initializers/express-routes'),
-      require('./initializers/http-server')
+      require('./initializers/http-server'),
+      require('./initializers/repl')
     ],
     function (err) {
       if (cb) return cb(err);
