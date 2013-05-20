@@ -1,3 +1,4 @@
+var coffee = require('coffee-script'); //allows requiring .coffee files
 var async = require('async');
 
 var Konfu = function () {
@@ -9,11 +10,11 @@ Konfu.start = function (cb) {
       // Initializers
       require('./initializers/config'),
       require('./initializers/logger'),
+      require('./initializers/user-initializers'),
       require('./initializers/express'),
       require('./initializers/express-sessions'),
       require('./initializers/express-middleware'),
       require('./initializers/express-routes'),
-      require('./initializers/user-initializers'),
       require('./initializers/http-server')
     ],
     function (err) {

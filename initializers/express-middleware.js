@@ -57,7 +57,7 @@ module.exports = function (params, cb) {
    * User defined middlewares
    */
   var user_middleware_path = path.join(config.rootPath, 'config/middleware.js');
-  console.log(user_middleware_path);
+  //console.log(user_middleware_path);
   if (fs.existsSync(user_middleware_path)) {
     require(user_middleware_path)(app);
   }
