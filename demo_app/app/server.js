@@ -1,3 +1,3 @@
-var konfu = require('../../');
+var gong = require('../../');
 
-konfu.start();
+gong.start();

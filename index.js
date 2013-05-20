@@ -1,11 +1,11 @@
 var coffee = require('coffee-script'); //allows requiring .coffee files
 var async = require('async');
 
-var Konfu = function () {
+var Gong = function () {
 
 }
 
-Konfu.start = function (cb) {
+Gong.start = function (cb) {
   async.waterfall([
       // Initializers
       require('./initializers/config'),
@@ -29,4 +29,4 @@ Konfu.start = function (cb) {
   );
 }
 
-module.exports = Konfu;
+module.exports = Gong;
