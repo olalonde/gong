@@ -6,7 +6,11 @@ module.exports = function (params, cb) {
 
   var config = params.config;
 
-  params.sessionStore = new RedisStore(config.redis);
+  var sessionStore = new RedisStore(config.redis);
+
+  config.sessions.store = sessionStore;
+
+  console.log(config.sessions);
 
   return cb(null, params);
 }

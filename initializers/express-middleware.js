@@ -45,7 +45,6 @@ module.exports = function (params, cb) {
   /**
    * Sessions
    */
-  config.sessions.sessionStore = params.sessionStore;
   connectr.use(express.session(config.sessions)).as('session');
 
   /**
