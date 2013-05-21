@@ -9,8 +9,5 @@ module.exports = function (params, cb) {
   var sessionStore = new RedisStore(config.redis);
 
   config.sessions.store = sessionStore;
-
-  console.log(config.sessions);
-
   return cb(null, params);
 }
