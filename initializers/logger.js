@@ -45,9 +45,11 @@ module.exports = function (params, cb) {
   });
 
   if (handleExceptions) {
-    logger.handleExceptions(new winston.transports.File({
-      filename: app.config.logs.exception
-    }));
+    if (config.logs && config.logs.exception) {
+      logger.handleExceptions(new winston.transports.File({
+        filename: config.logs.exception
+      }));
+    }
     logger.exitOnError = false;
   }
 

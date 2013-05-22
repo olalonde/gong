@@ -7,13 +7,13 @@ module.exports = function (params, cb) {
   var config = params.config;
 
   // @todo use fs.exists instead of relying on try/catch block
-  try {
-    user_initializers_path = path.join(config.rootPath, 'config/initializers/');
+  var user_initializers_path = path.join(config.rootPath, 'config/initializers/');
+  if (fs.existsSync(require.resolve(user_initializers_path))) {
     var initializers = require(user_initializers_path);
     logger.debug('Running user defined initializers');
   }
-  catch (e) {
-    debug(e);
+  else {
+    logger.debug('No user defined initializers found');
     // no user initializers
     return cb(null, params);
   }
