@@ -22,6 +22,7 @@
     "passport": "~0.1.17",
     "connectr": "0.0.1",
     "debug": "~0.7.2",
-    "coffee-script": "~1.6.2"
+    "coffee-script": "~1.6.2",
+    "winston": "~0.7.1"
   }
 }
