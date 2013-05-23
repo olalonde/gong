@@ -5,7 +5,24 @@ var Gong = function () {
 
 }
 
-Gong.start = function (cb) {
+Gong.startSilent = function (cb) {
+
+  Gong.start({ silent: true }, cb);
+
+}
+
+/**
+ * @param {options} options optional
+ * @param {Function} cb function(err, {app: ..., config: ...})
+ */
+Gong.start = function (options, cb) {
+  if (typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
+  options = options || {};
+
   async.waterfall([
       // Initializers
       require('./initializers/config'),
@@ -15,11 +32,19 @@ Gong.start = function (cb) {
       require('./initializers/express-sessions'),
       require('./initializers/express-middleware'),
       require('./initializers/express-routes'),
-      require('./initializers/http-server'),
+      function (params, cb) {
+        if (options.silent) {
+          // dont launch server when silent options is true
+          cb(null, params);
+        }
+        else {
+          require('./initializers/http-server')(params, cb);
+        }
+      },
       require('./initializers/repl')
     ],
-    function (err) {
-      if (cb) return cb(err);
+    function (err, params) {
+      if (cb) return cb(err, params);
       if (err) {
         console.error('Error while initializing server:');
         console.error(err);
