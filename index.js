@@ -30,7 +30,8 @@ Gong.init = function (options, cb) {
   function (err, params) {
     _this.params = params;
     _this.isInit = true;
-    if (cb) return cb(err, params);
+    if (cb)
+      return cb(err, params);
     if (err) {
       console.error('Error while initializing server:');
       console.error(err);
@@ -45,11 +46,12 @@ Gong.checkInit = function () {
 }
 
 Gong.start = function (cb) {
+  var _this = this;
   this.init(function (err, params) {
-    if (err) return cb(err, params);
-    this.listen(function (err, params) {
-      return cb(err, params);
-    });
+    if (err && cb) return cb(err, params);
+    if (err) return console.error('Error initializing server');
+    if (!cb) cb = function () {};
+    _this.listen(cb);
   });
 }
 
