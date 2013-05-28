@@ -36,7 +36,7 @@ module.exports = function (params, cb) {
   logger.setLevels(levels);
   winston.addColors(colors);
 
-  var handleExceptions = (config.env === 'development') ? false : true;
+  var handleExceptions = (config.env === 'production') ? true : false;
 
   logger.add(winston.transports.Console, {
     level: 'debug',
