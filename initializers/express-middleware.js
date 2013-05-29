@@ -50,7 +50,9 @@ module.exports = function (params, cb) {
   /**
    * CSRF
    */
-  connectr.use(express.csrf()).as('csrf');
+  if (config.csrf !== false) {
+    connectr.use(express.csrf()).as('csrf');
+  }
 
   /**
    * User defined middlewares
