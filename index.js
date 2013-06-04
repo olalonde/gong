@@ -4,6 +4,9 @@ var async = require('async');
 //@todo: make gong a class?
 var Gong = {};
 
+// only let gong initialize once
+var cache;
+
 /**
  * @param {options} options optional
  * @param {Function} cb function(err, {app: ..., config: ...})
@@ -12,6 +15,10 @@ Gong.init = function (options, cb) {
   if (typeof options === 'function') {
     cb = options;
     options = {};
+  }
+
+  if (cache) {
+    return cb.apply(null, cache);
   }
 
   options = options || {};
@@ -30,8 +37,10 @@ Gong.init = function (options, cb) {
   function (err, params) {
     _this.params = params;
     _this.isInit = true;
-    if (cb)
+    if (cb) {
+      cache = [err, params];
       return cb(err, params);
+    }
     if (err) {
       console.error('Error while initializing server:');
       console.error(err);

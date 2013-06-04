@@ -1,6 +1,6 @@
 {
   "name": "gong",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gong REST framework based on Express and Connect.",
   "main": "",
   "scripts": {
