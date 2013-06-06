@@ -11,6 +11,10 @@ module.exports = function (params, cb) {
   // @global
   var logger = global.logger = new (winston.Logger)();
 
+  if (config.silent) {
+    return cb(null, params);
+  }
+
   var levels = {
     debug: 0,
     info: 1,
@@ -37,6 +41,7 @@ module.exports = function (params, cb) {
   winston.addColors(colors);
 
   var handleExceptions = (config.env === 'production') ? true : false;
+
 
   logger.add(winston.transports.Console, {
     level: 'debug',

@@ -40,7 +40,10 @@ module.exports = function (params, cb) {
   // we need to tell the logger to use req.ip instead of the socket's
   // remote address if we want to use the IP set by the reverse proxy
   express.logger['remote-addr'] = function (req) { return req.ip; };
-  connectr.use(express.logger('dev')).as('logger');
+
+  if (!config.silent) {
+    connectr.use(express.logger('dev')).as('logger');
+  }
 
   /**
    * Sessions
@@ -61,7 +64,6 @@ module.exports = function (params, cb) {
    * User defined middlewares
    */
   var user_middleware_path = path.join(config.rootPath, 'config/middleware.js');
-  //console.log(user_middleware_path);
   if (fs.existsSync(user_middleware_path)) {
     require(user_middleware_path)(app, config);
   }
@@ -90,7 +92,6 @@ module.exports = function (params, cb) {
   app.configure('development', function() {
     app.use(express.errorHandler());
   });
-
 
   return cb(null, params);
 }
