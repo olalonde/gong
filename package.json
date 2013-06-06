@@ -14,6 +14,7 @@
     "underscore": "~1.4.4",
     "connect-redis": "~1.4.5",
     "connect-acceptoverride": "0.0.3",
+    "debug": "*",
     "daobao": "*",
     "chungking": "0.0.7",
     "railway-routes": "0.0.9-3",
