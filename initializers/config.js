@@ -5,6 +5,11 @@ var fs = require('fs'),
 module.exports = function (cb) {
   var rootPath = path.resolve('./'); // directory from where script was launched
   var configPath = path.join(rootPath, 'config/default.json');
+
+  if (!fs.existsSync(configPath)) {
+    configPath = path.join(__dirname, '../skeletton/config/default.json');
+  }
+
   var config = require(configPath);
 
   config.rootPath = rootPath;

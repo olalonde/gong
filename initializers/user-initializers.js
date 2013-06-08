@@ -8,15 +8,18 @@ module.exports = function (params, cb) {
 
   // @todo use fs.exists instead of relying on try/catch block
   var user_initializers_path = path.join(config.rootPath, 'config/initializers/');
-  if (fs.existsSync(require.resolve(user_initializers_path))) {
-    var initializers = require(user_initializers_path);
-    logger.debug('Running user defined initializers');
+
+  try {
+    require.resolve(user_initializers_path);
   }
-  else {
+  catch (e) {
     logger.debug('No user defined initializers found');
     // no user initializers
     return cb(null, params);
   }
+
+  var initializers = require(user_initializers_path);
+  logger.debug('Running user defined initializers');
 
   // Pass the Konfu's initializer's params argument to the user's first
   // initializer function.

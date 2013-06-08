@@ -7,7 +7,8 @@ module.exports = function (params, cb) {
   var config = params.config;
 
   var sessionStore = new RedisStore(config.redis);
+  sessionStore.client.stream.unref();
 
   config.sessions.store = sessionStore;
   return cb(null, params);
-}
+};
