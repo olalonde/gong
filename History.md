@@ -1,8 +1,13 @@
 
+0.0.4 / 2013-06-09 
+==================
+
+ * Created History.md
+ * unref redisstore connection
+
 0.0.3 / 2013-06-09 
 ==================
 
- * unref redisstore connection
  * Allow a silent:true option for testing 
  * implemented a way to disable CSRF
  * added ability to just return app object without launching server with {silent: true option}. repl disabled by default
