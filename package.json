@@ -1,6 +1,6 @@
 {
   "name": "gong",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Gong REST framework based on Express and Connect.",
   "main": "",
   "scripts": {
@@ -14,7 +14,7 @@
     "underscore": "~1.4.4",
     "connect-redis": "~1.4.5",
     "connect-acceptoverride": "0.0.3",
-    "debug": "*",
+    "debug": "~0.7.2",
     "daobao": "*",
     "chungking": "0.0.7",
     "railway-routes": "0.0.9-3",
@@ -22,7 +22,6 @@
     "handlebars": "~1.0.11",
     "passport": "~0.1.17",
     "connectr": "0.0.1",
-    "debug": "~0.7.2",
     "coffee-script": "~1.6.2",
     "winston": "~0.7.1",
     "express": "~3.2.5"
