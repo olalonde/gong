@@ -1,3 +1,15 @@
 {
-  "sessions": {}
+  "sessions": {
+    "secret": "some random key here...",
+    "key": "sid",
+    "cookie": {
+      "maxAge": 31536000000
+    }
+  },
+  "redis": {},
+  "domain": "localhost",
+  "http": {
+    "port": 8000
+  },
+  "uploadDir": "/tmp"
 }

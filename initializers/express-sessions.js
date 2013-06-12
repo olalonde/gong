@@ -6,6 +6,9 @@ module.exports = function (params, cb) {
 
   var config = params.config;
 
+  if (!config.redis)
+    return cb(new Error('You must specify redis config'));
+
   var sessionStore = new RedisStore(config.redis);
   sessionStore.client.stream.unref();
 

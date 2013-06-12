@@ -6,11 +6,15 @@ module.exports = function (cb) {
   var rootPath = path.resolve('./'); // directory from where script was launched
   var configPath = path.join(rootPath, 'config/default.json');
 
+  var skelConfigPath = path.join(__dirname, '../skeletton/config/default.json');
   if (!fs.existsSync(configPath)) {
-    configPath = path.join(__dirname, '../skeletton/config/default.json');
+    configPath = skelConfigPath;
   }
 
+  var skelConfig = require(skelConfigPath);
   var config = require(configPath);
+
+  config = _.extend(skelConfig, config);
 
   config.rootPath = rootPath;
   config.env = process.env.NODE_ENV || 'development';
@@ -24,4 +28,4 @@ module.exports = function (cb) {
   config = _.extend(config, configOverride);
 
   cb(null, { config: config });
-}
+};

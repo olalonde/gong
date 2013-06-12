@@ -5,18 +5,22 @@ module.exports = function (params, cb) {
 
   var config = params.config,
     app = params.app,
-    controllersPath = path.join(config.rootPath, 'app/controllers/');
+    controllersPath = path.join(config.rootPath, 'app/controllers/'),
+    controllers,
+    handler,
+    map;
 
   try {
     require.resolve(controllersPath);
+    controllers = require(controllersPath);
+    handler = require('daobao').assignHandler(controllers);
   }
   catch (e) {
-    return cb(null, params);
+    // didnt fint controllers path
   }
 
-  var controllers = require(controllersPath),
-    handler = require('daobao').assignHandler(controllers),
-    map = new require('railway-routes').Map(app, handler);
+  handler = handler || function () {};
+  map = new require('railway-routes').Map(app, handler);
 
   require(path.join(config.rootPath, 'config/routes.js'))(map);
 

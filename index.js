@@ -58,7 +58,11 @@ Gong.start = function (cb) {
   var _this = this;
   this.init(function (err, params) {
     if (err && cb) return cb(err, params);
-    if (err) return console.error('Error initializing server');
+    if (err) {
+      console.error('Error initializing server');
+      console.error(err);
+      return;
+    }
     if (!cb) cb = function () {};
     _this.listen(cb);
   });

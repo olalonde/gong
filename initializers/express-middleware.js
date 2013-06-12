@@ -94,5 +94,5 @@ module.exports = function (params, cb) {
   });
 
   return cb(null, params);
-}
+};
 
